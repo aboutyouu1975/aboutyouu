@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quotes Aesthetic - Mengagumimu dari Jauh</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, #fddde6 0%, #fbe9e9 100%);
+    font-family: 'Poppins', sans-serif;
+    color: #4a2c2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px 20px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    color: #e96fa8;
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+
+  .quotes-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .quote-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(255, 182, 193, 0.4);
+    padding: 30px 25px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+
+  .quote-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 34px rgba(255, 182, 193, 0.6);
+  }
+
+  .quote-text {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  .quote-author {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #a85f78;
+    letter-spacing: 0.1em;
+  }
+
+  /* Ornamental Window with Cat */
+  .window {
+    margin: 20px auto 0 auto;
+    width: 120px;
+    height: 120px;
+    border: 4px solid #f9a7c6;
+    border-radius: 15px;
+    background: #fff0f6;
+    position: relative;
+    box-shadow: 0 8px 16px rgba(249, 167, 198, 0.3);
+  }
+
+  .window::before, .window::after {
+    content: "";
+    position: absolute;
+    background: #f9a7c6;
+  }
+
+  .window::before {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    transform: translateY(-50%);
+  }
+
+  .window::after {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    transform: translateX(-50%);
+  }
+
+  .cat {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: #f69d42;
+    border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+    box-shadow: inset -4px -4px 8px #d27810;
+  }
+
+  /* Audio player styling */
+  audio {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    outline: none;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(255, 182, 193, 0.6);
+  }
+</style>
+</head>
+<body>
+
+  <h1>Mengagumimu dari Jauh</h1>
+
+  <div class="quotes-wrapper">
+
+    <div class="quote-card">
+      <div class="quote-text">Ketika ikhlas adalah titik cinta yang paling tinggi.</div>
+      <div class="quote-author">- Tulisan Aura -</div>
+      <div class="window"><div class="cat"></div></div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">Mencintai dari jauh bukan berarti tidak setia, tapi bagaimana menjaga hati tetap utuh.</div>
+      <div class="quote-author">- Tulisan Aura -</div>
+      <div class="window"><div class="cat"></div></div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">Rindu adalah bahasa hati yang tak membutuhkan kata untuk dimengerti.</div>
+      <div class="quote-author">- Tulisan Aura -</div>
+      <div class="window"><div class="cat"></div></div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">Jauh bukan alasan untuk berhenti mengagumi dan terus berharap yang terbaik.</div>
+      <div class="quote-author">- Tulisan Aura -</div>
+      <div class="window"><div class="cat"></div></div>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-text">Kadang hening dan kesunyian adalah cara terbaik untuk merasakan kedamaian dalam cinta.</div>
+      <div class="quote-author">- Tulisan Aura -</div>
+      <div class="window"><div class="cat"></div></div>
+    </div>
+
+  </div>
+
+  <!-- Audio player for About You by The 1975 -->
+  <audio controls autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/02/21/audio_744a9a98a3.mp3?filename=slow-jam-8435.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+</body>
+</html>
