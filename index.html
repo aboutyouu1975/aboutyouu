@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3726mdpl — About You</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      overflow:hidden;
+      height:100vh;
+      background:black;
+      color:white;
+      position:relative;
+    }
+
+    /* ===== VIDEO BACKGROUND ===== */
+
+    #bg-video{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-3;
+
+      filter:
+      brightness(0.35)
+      saturate(1.2)
+      blur(1px);
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+
+      background:
+      linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.82)),
+      radial-gradient(
+      circle at top,
+      rgba(255,20,147,0.18),
+      transparent 60%);
+
+      z-index:-2;
+
+      backdrop-filter:blur(4px);
+    }
+
+    .glow{
+      position:fixed;
+
+      width:500px;
+      height:500px;
+
+      background:
+      rgba(255,20,147,0.12);
+
+      border-radius:50%;
+
+      filter:blur(120px);
+
+      top:-120px;
+      right:-120px;
+
+      z-index:-1;
+    }
+
+    /* ===== MAIN CONTAINER ===== */
+
+    .container{
+      width:100%;
+      height:100vh;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      padding:20px;
+    }
+
+    .card{
+
+      width:90%;
+      max-width:850px;
+
+      padding:45px 35px;
+
+      border-radius:35px;
+
+      background:
+      rgba(255,255,255,0.06);
+
+      border:
+      1px solid rgba(255,192,203,0.15);
+
+      backdrop-filter:blur(18px);
+
+      box-shadow:
+      0 10px 40px rgba(255,20,147,0.12),
+      0 10px 50px rgba(0,0,0,0.5);
+
+      animation:fadeUp 1.3s ease;
+
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+
+      position:absolute;
+
+      top:-100px;
+      right:-100px;
+
+      width:250px;
+      height:250px;
+
+      background:
+      rgba(255,255,255,0.05);
+
+      border-radius:50%;
+
+      filter:blur(20px);
+    }
+
+    /* ===== TITLE ===== */
+
+    .title{
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .title h1{
+
+      font-size:4rem;
+
+      font-family:
+      'Cormorant Garamond',serif;
+
+      letter-spacing:4px;
+
+      text-shadow:
+      0 0 10px rgba(255,105,180,0.5),
+      0 0 30px rgba(255,20,147,0.35);
+
+    }
+
+    .title p{
+      opacity:0.8;
+
+      letter-spacing:5px;
+
+      margin-top:8px;
+
+      font-size:0.9rem;
+    }
+
+    /* ===== QUOTES ===== */
+
+    .quote-box{
+
+      position:relative;
+
+      min-height:180px;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      text-align:center;
+
+      padding:30px;
+
+      border-radius:25px;
+
+      background:
+      rgba(255,192,203,0.05);
+
+      border:
+      1px solid rgba(255,182,193,0.08);
+
+      overflow:hidden;
+    }
+
+    .quote{
+
+      position:absolute;
+
+      opacity:0;
+
+      transform:
+      translateY(30px)
+      scale(0.96);
+
+      transition:0.9s ease;
+
+      font-size:1.15rem;
+
+      line-height:1.9;
+
+      max-width:90%;
+
+      font-weight:300;
+    }
+
+    .quote.active{
+
+      opacity:1;
+
+      transform:
+      translateY(0)
+      scale(1);
+
+    }
+
+    /* ===== BUTTONS ===== */
+
+    .controls{
+
+      margin-top:35px;
+
+      display:flex;
+      justify-content:center;
+
+      gap:16px;
+
+      flex-wrap:wrap;
+    }
+
+    button{
+
+      padding:13px 28px;
+
+      border:none;
+
+      border-radius:50px;
+
+      color:white;
+
+      cursor:pointer;
+
+      transition:0.4s ease;
+
+      backdrop-filter:blur(10px);
+
+      font-size:0.95rem;
+    }
+
+    .next-btn{
+
+      background:
+      linear-gradient(
+      135deg,
+      rgba(255,105,180,0.28),
+      rgba(255,20,147,0.15));
+
+      border:
+      1px solid rgba(255,255,255,0.1);
+    }
+
+    .next-btn:hover{
+
+      transform:
+      translateY(-3px)
+      scale(1.05);
+
+      box-shadow:
+      0 0 20px rgba(255,20,147,0.25);
+    }
+
+    .music-btn{
+
+      background:
+      rgba(255,182,193,0.12);
+
+      border:
+      1px solid rgba(255,255,255,0.08);
+    }
+
+    .music-btn:hover{
+
+      background:
+      rgba(255,182,193,0.22);
+
+      transform:
+      translateY(-3px);
+    }
+
+    /* ===== CREDIT ===== */
+
+    .credit{
+
+      position:fixed;
+
+      bottom:18px;
+      left:50%;
+
+      transform:
+      translateX(-50%);
+
+      font-size:0.85rem;
+
+      letter-spacing:2px;
+
+      opacity:0.65;
+    }
+
+    /* ===== HEARTS ===== */
+
+    .hearts span{
+
+      position:absolute;
+
+      bottom:-50px;
+
+      color:
+      rgba(255,182,193,0.5);
+
+      animation:
+      float linear infinite;
+
+      user-select:none;
+    }
+
+    @keyframes float{
+
+      from{
+
+        transform:
+        translateY(0)
+        rotate(0deg);
+
+        opacity:0;
+      }
+
+      20%{
+        opacity:0.8;
+      }
+
+      to{
+
+        transform:
+        translateY(-120vh)
+        rotate(360deg);
+
+        opacity:0;
+      }
+    }
+
+    /* ===== FADE ===== */
+
+    @keyframes fadeUp{
+
+      from{
+
+        opacity:0;
+
+        transform:
+        translateY(35px);
+      }
+
+      to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+      }
+    }
+
+    /* ===== MOBILE ===== */
+
+    @media(max-width:768px){
+
+      .title h1{
+        font-size:2.8rem;
+      }
+
+      .quote{
+        font-size:1rem;
+      }
+
+      .card{
+        padding:35px 22px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== VIDEO BACKGROUND ===== -->
+
+  <video autoplay muted loop playsinline id="bg-video">
+
+    <!-- GANTI DENGAN VIDEO ANIME KAMU -->
+    <source src="anime-romantic.mp4" type="video/mp4">
+
+  </video>
+
+  <div class="overlay"></div>
+  <div class="glow"></div>
+
+  <!-- ===== HEART EFFECT ===== -->
+
+  <div class="hearts"></div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+
+  <div class="container">
+
+    <div class="card">
+
+      <div class="title">
+
+        <h1>3726mdpl</h1>
+        <p>ABOUT YOU</p>
+
+      </div>
+
+      <div class="quote-box">
+
+        <div class="quote active">
+          “jatuh cinta padamu adalah ketidak sengajaan yang jauh lebih indah dari ribuan hal yang pernah aku rencanakan”
+        </div>
+
+        <div class="quote">
+          “meskipun tidak sempat memilikinya, terimakasih atas bahagianya.”
+        </div>
+
+        <div class="quote">
+          “cinta ga selalu tentang memiliki, kadang hanya tentang mengagumi.”
+        </div>
+
+        <div class="quote">
+          “bahkan di bumi yang sangat luas ini, bagian paling menyenangkan adalah bertemu denganmu.”
+        </div>
+
+        <div class="quote">
+          “jika hidup adalah sebuah buku, maka bertemu denganmu adalah bab favoritku.”
+        </div>
+
+        <div class="quote">
+          “tatapan itu secara tidak sengaja memberikan perasaan yang amat panjang ini.”
+        </div>
+
+        <div class="quote">
+          “terimakasih karena telah menjadi orang yang pernah aku kagumi.”
+        </div>
+
+      </div>
+
+      <!-- ===== BUTTON ===== -->
+
+      <div class="controls">
+
+        <button class="next-btn" onclick="nextQuote()">
+          Next Quote
+        </button>
+
+        <button class="music-btn" onclick="toggleMusic()">
+          Play Music
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ===== CREDIT ===== -->
+
+  <div class="credit">
+    created by R
+  </div>
+
+  <!-- ===== MUSIC ===== -->
+
+  <audio id="music" loop>
+
+    <!-- GANTI DENGAN LAGU KAMU -->
+    <source src="The 1975 - About You (Official).mp3" type="audio/mpeg">
+
+  </audio>
+
+  <!-- ===== SCRIPT ===== -->
+
+  <script>
+
+    /* ===== QUOTE SLIDER ===== */
+
+    const quotes =
+    document.querySelectorAll('.quote');
+
+    let current = 0;
+
+    function nextQuote(){
+
+      quotes[current]
+      .classList.remove('active');
+
+      current =
+      (current + 1) % quotes.length;
+
+      quotes[current]
+      .classList.add('active');
+
+    }
+
+    setInterval(nextQuote,6000);
+
+    /* ===== MUSIC ===== */
+
+    const music =
+    document.getElementById('music');
+
+    let playing = false;
+
+    function toggleMusic(){
+
+      if(!playing){
+
+        music.play();
+
+        playing = true;
+
+      }else{
+
+        music.pause();
+
+        playing = false;
+
+      }
+
+    }
+
+    /* ===== FLOATING HEART ===== */
+
+    const hearts =
+    document.querySelector('.hearts');
+
+    function createHeart(){
+
+      const heart =
+      document.createElement('span');
+
+      heart.innerHTML = '❤';
+
+      heart.style.left =
+      Math.random()*100 + 'vw';
+
+      heart.style.fontSize =
+      (Math.random()*18+12)+'px';
+
+      heart.style.animationDuration =
+      (Math.random()*6+6)+'s';
+
+      hearts.appendChild(heart);
+
+      setTimeout(()=>{
+
+        heart.remove();
+
+      },12000);
+
+    }
+
+    setInterval(createHeart,400);
+
+  </script>
+
+</body>
+</html>
